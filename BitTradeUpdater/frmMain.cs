@@ -13,7 +13,7 @@ namespace BitTradeUpdater
     public partial class frmMain : Form
     {
         const string updateXml = "update.xml";
-        const string serverUri = "https://github.com/sums2022/bittrade/raw/main/";
+        const string serverUri = "https://github.com/sums2022/BitTradeUpdate/raw/main/";
 
         string projPath = "";
         string releaseVer = "";

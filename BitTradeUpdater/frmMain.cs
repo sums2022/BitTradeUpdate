@@ -309,9 +309,9 @@ namespace BitTradeUpdater
             DocumentSnapshot snap = await docRef.GetSnapshotAsync();
             Dictionary<FieldPath, object> updates = new Dictionary<FieldPath, object>
                 {
-                    { new FieldPath("fwVersion"), snap.GetValue<string>("devVersion") },
-                    { new FieldPath("fwUrlpath"), snap.GetValue<string>("devUrlpath") },
-                    { new FieldPath("fwSha256"), snap.GetValue<string>("devSha256") }
+                    { new FieldPath("relVersion"), snap.GetValue<string>("devVersion") },
+                    { new FieldPath("relUrlpath"), snap.GetValue<string>("devUrlpath") },
+                    { new FieldPath("relSha256"), snap.GetValue<string>("devSha256") }
                 };
             await docRef.UpdateAsync(updates);
         }

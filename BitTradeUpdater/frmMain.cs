@@ -129,18 +129,18 @@ namespace BitTradeUpdater
             return sha256;
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private async void btnSubmit_Click(object sender, EventArgs e)
         {
             string project = lbProject.Text;
             if (project != "")
             {
                 MakeProject(project);
                 SummitProject();
-                UpdateFirebaseRemote();
+                await UpdateFirebaseRemote();
             }
         }
 
-        private async void UpdateFirebaseRemote()
+        private async Task<int> UpdateFirebaseRemote()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"bittrade-0-firebase.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
@@ -154,6 +154,8 @@ namespace BitTradeUpdater
                     { new FieldPath("devSha256"), devSha256 }
                 };
             await docRef.UpdateAsync(updates);
+
+            return 0;
         }
 
         private void SummitProject(bool pause=true)
@@ -326,12 +328,12 @@ namespace BitTradeUpdater
             }
         }
 
-        private void btnRelease_Click(object sender, EventArgs e)
+        private async void btnRelease_Click(object sender, EventArgs e)
         {
             string project = lbProject.Text;
             if (project != "")
             {
-                MakeRelease();
+                await MakeRelease();
                 UpdateXml(project);
             }
         }
@@ -344,8 +346,8 @@ namespace BitTradeUpdater
                 BuildAndSubmit(project);
                 await Task.Delay(10000);
                 MakeProject(project);
-                UpdateFirebaseRemote();
-                MakeRelease();
+                await UpdateFirebaseRemote();
+                await MakeRelease();
                 UpdateXml(project, false);
             }
         }
@@ -370,7 +372,7 @@ namespace BitTradeUpdater
             }
         }
 
-        private async void MakeRelease()
+        private async Task<int> MakeRelease()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"bittrade-0-firebase.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
@@ -386,6 +388,8 @@ namespace BitTradeUpdater
                     { new FieldPath("relSha256"), snap.GetValue<string>("devSha256") }
                 };
             await docRef.UpdateAsync(updates);
+
+            return 0;
         }
     }
 }

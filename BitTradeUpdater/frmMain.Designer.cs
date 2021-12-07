@@ -42,6 +42,7 @@
             this.lbLocal = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnRelease = new System.Windows.Forms.Button();
+            this.btnAllInOne = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbProject
@@ -59,7 +60,7 @@
             // 
             this.lbCurrent2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCurrent2.AutoSize = true;
-            this.lbCurrent2.Location = new System.Drawing.Point(11, 165);
+            this.lbCurrent2.Location = new System.Drawing.Point(11, 195);
             this.lbCurrent2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCurrent2.Name = "lbCurrent2";
             this.lbCurrent2.Size = new System.Drawing.Size(112, 16);
@@ -70,7 +71,7 @@
             // 
             this.lbNew2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbNew2.AutoSize = true;
-            this.lbNew2.Location = new System.Drawing.Point(11, 181);
+            this.lbNew2.Location = new System.Drawing.Point(11, 211);
             this.lbNew2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNew2.Name = "lbNew2";
             this.lbNew2.Size = new System.Drawing.Size(111, 16);
@@ -81,7 +82,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 226);
+            this.label4.Location = new System.Drawing.Point(11, 256);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 16);
@@ -92,16 +93,16 @@
             // 
             this.tbDescript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDescript.Location = new System.Drawing.Point(12, 248);
+            this.tbDescript.Location = new System.Drawing.Point(12, 278);
             this.tbDescript.Multiline = true;
             this.tbDescript.Name = "tbDescript";
-            this.tbDescript.Size = new System.Drawing.Size(327, 113);
+            this.tbDescript.Size = new System.Drawing.Size(327, 89);
             this.tbDescript.TabIndex = 5;
             // 
             // lbRemote
             // 
             this.lbRemote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbRemote.Location = new System.Drawing.Point(121, 181);
+            this.lbRemote.Location = new System.Drawing.Point(121, 211);
             this.lbRemote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRemote.Name = "lbRemote";
             this.lbRemote.Size = new System.Drawing.Size(120, 16);
@@ -110,7 +111,7 @@
             // lbRelease
             // 
             this.lbRelease.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbRelease.Location = new System.Drawing.Point(121, 165);
+            this.lbRelease.Location = new System.Drawing.Point(121, 195);
             this.lbRelease.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRelease.Name = "lbRelease";
             this.lbRelease.Size = new System.Drawing.Size(120, 16);
@@ -119,7 +120,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSubmit.Location = new System.Drawing.Point(102, 367);
+            this.btnSubmit.Location = new System.Drawing.Point(125, 373);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(90, 23);
             this.btnSubmit.TabIndex = 9;
@@ -131,7 +132,7 @@
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.Location = new System.Drawing.Point(90, 222);
+            this.btnNew.Location = new System.Drawing.Point(90, 252);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(25, 25);
             this.btnNew.TabIndex = 10;
@@ -140,7 +141,8 @@
             // 
             // btnBuild
             // 
-            this.btnBuild.Location = new System.Drawing.Point(21, 367);
+            this.btnBuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBuild.Location = new System.Drawing.Point(47, 373);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(75, 23);
             this.btnBuild.TabIndex = 12;
@@ -151,7 +153,7 @@
             // lbLocal
             // 
             this.lbLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbLocal.Location = new System.Drawing.Point(121, 197);
+            this.lbLocal.Location = new System.Drawing.Point(121, 227);
             this.lbLocal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLocal.Name = "lbLocal";
             this.lbLocal.Size = new System.Drawing.Size(120, 16);
@@ -161,7 +163,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 197);
+            this.label10.Location = new System.Drawing.Point(11, 227);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(96, 16);
@@ -171,19 +173,31 @@
             // btnRelease
             // 
             this.btnRelease.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRelease.Location = new System.Drawing.Point(198, 367);
+            this.btnRelease.Location = new System.Drawing.Point(221, 373);
             this.btnRelease.Name = "btnRelease";
-            this.btnRelease.Size = new System.Drawing.Size(90, 23);
+            this.btnRelease.Size = new System.Drawing.Size(79, 23);
             this.btnRelease.TabIndex = 15;
             this.btnRelease.Text = "Release";
             this.btnRelease.UseVisualStyleBackColor = true;
             this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
             // 
+            // btnAllInOne
+            // 
+            this.btnAllInOne.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAllInOne.Location = new System.Drawing.Point(47, 402);
+            this.btnAllInOne.Name = "btnAllInOne";
+            this.btnAllInOne.Size = new System.Drawing.Size(253, 23);
+            this.btnAllInOne.TabIndex = 16;
+            this.btnAllInOne.Text = "ALL IN ONE";
+            this.btnAllInOne.UseVisualStyleBackColor = true;
+            this.btnAllInOne.Click += new System.EventHandler(this.btnAllInOne_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 403);
+            this.ClientSize = new System.Drawing.Size(347, 433);
+            this.Controls.Add(this.btnAllInOne);
             this.Controls.Add(this.btnRelease);
             this.Controls.Add(this.lbLocal);
             this.Controls.Add(this.label10);
@@ -221,6 +235,7 @@
         private System.Windows.Forms.Label lbLocal;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnRelease;
+        private System.Windows.Forms.Button btnAllInOne;
     }
 }
 

@@ -152,11 +152,12 @@ namespace BitTradeUpdater
             await docRef.UpdateAsync(updates);
         }
 
-        private void SummitProject()
+        private void SummitProject(bool pause=true)
         {
             // string comment = tbDescript.Text;
             string comment = "";
-            string argument = "/C choice /C Y /N /D Y /T 4 & git add -A & git commit {0} & git pull & git push & pause";
+            string argument = "/C choice /C Y /N /D Y /T 4 & git add -A & git commit {0} & git pull & git push";
+            if (pause) argument += " & pause";
 
             if (tbDescript.Lines.Length == 0)
             {
@@ -179,7 +180,7 @@ namespace BitTradeUpdater
             // MessageBox.Show(string.Format("Project {0} has been submit", lbProject.Text));
         }
 
-        private void BuildProject(string project)
+        private void BuildProject(string project, bool pause = true)
         {
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(updateXml);
@@ -195,9 +196,12 @@ namespace BitTradeUpdater
             localVer = GetFlutterVersion(projPath, true);
             lbLocal.Text = localVer;
 
-            ProcessStartInfo Info = new ProcessStartInfo();
-            Info.Arguments = string.Format("/C echo BUILD Version={0} & cd \"{1}\" & flutter build apk & pause",
+            string cmd = string.Format("/C echo BUILD Version={0} & cd \"{1}\" & flutter build apk",
                 this.localVer, projPath);
+            if (pause) cmd += " & pause";
+
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.Arguments = cmd;
             Info.FileName = "cmd.exe";
             Info.CreateNoWindow = true;
             Process.Start(Info);
@@ -276,6 +280,20 @@ namespace BitTradeUpdater
             string project = lbProject.Text;
             if (project != "")
             {
+                MakeRelease();
+                UpdateXml(project);
+            }
+        }
+
+        private void btnAllInOne_Click(object sender, EventArgs e)
+        {
+            string project = lbProject.Text;
+            if (project != "")
+            {
+                BuildProject(project, false);
+                MakeProject(project);
+                SummitProject(false);
+                UpdateFirebaseRemote();
                 MakeRelease();
                 UpdateXml(project);
             }

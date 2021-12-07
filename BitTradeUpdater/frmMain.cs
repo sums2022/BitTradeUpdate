@@ -38,6 +38,9 @@ namespace BitTradeUpdater
             {
                 lbProject.Items.Add(xn.Attributes["appID"].InnerText);
             }
+
+            if (lbProject.Items.Count > 0)
+                lbProject.SelectedIndex = 0;
         }
 
         private void lbProject_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,7 +81,7 @@ namespace BitTradeUpdater
             return string.Format("v{0:yy.MM.dd}.{1:00000}", buildDateTime, ver.Revision);
         }
 
-        private void MakeProject(string project)
+        private void MakeProject(string project, bool copyfile = true)
         {
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(updateXml);
@@ -101,7 +104,7 @@ namespace BitTradeUpdater
             this.remoteVer = this.localVer;
             lbRemote.Text = this.remoteVer;
             string dstFile = string.Format("{0}/{1}_{2}.apk", project, project, remoteVer);
-            File.Copy(apkFile, dstFile, true);
+            if (copyfile) File.Copy(apkFile, dstFile, true);
             devUrlpath = serverUri + dstFile.Replace('\\', '/');
             devSha256 = CalcSha256(dstFile);
 
@@ -255,6 +258,53 @@ namespace BitTradeUpdater
             return strVer;
         }
 
+        private void BuildAndSubmit(string project)
+        {
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(updateXml);
+
+            XmlNode xnode = xdoc.SelectSingleNode("//update[@appID='" + project + "']");
+            if (xnode == null)
+            {
+                MessageBox.Show("Cannot build project " + project);
+                return;
+            }
+
+            string projPath = xnode["projPath"].InnerText;
+            localVer = GetFlutterVersion(projPath, true);
+            lbLocal.Text = localVer;
+            string curdir = Directory.GetCurrentDirectory();
+
+            string cmd = string.Format("/C echo BUILD Version={0} & cd \"{1}\" & flutter build apk & cd \"{2}\"",
+                this.localVer, projPath, curdir);
+
+            string apkFile = Path.Combine(projPath, "build\\app\\outputs\\apk\\release\\app-release.apk");
+            apkFile = apkFile.Replace('/', '\\');
+            string dstFile = string.Format("{0}\\{1}_{2}.apk", project, project, localVer);
+            string copyfile = string.Format("copy /y {0} {1} ", apkFile, dstFile);
+
+            string comment = "";
+            if (tbDescript.Lines.Length == 0)
+            {
+                comment = string.Format("-m \"{0}_{1}\"", lbProject.Text, lbRemote.Text);
+            }
+            else
+            {
+                foreach (string line in tbDescript.Lines)
+                {
+                    comment += string.Format("-m \"{0}\" ", line);
+                }
+            }
+            String submit = string.Format("choice /C Y /N /D Y /T 4 & git add -A & git commit {0} & git pull & git push & pause", comment);
+
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.Arguments = cmd + " & " + copyfile + " & " + submit;
+            Info.FileName = "cmd.exe";
+            Info.CreateNoWindow = true;
+            Process.Start(Info);
+        }
+
+
         private void btnNew_Click(object sender, EventArgs e)
         {
             string[] lines = tbDescript.Lines;
@@ -290,16 +340,15 @@ namespace BitTradeUpdater
             string project = lbProject.Text;
             if (project != "")
             {
-                BuildProject(project, false);
+                BuildAndSubmit(project);
                 MakeProject(project);
-                SummitProject(false);
                 UpdateFirebaseRemote();
                 MakeRelease();
-                UpdateXml(project);
+                UpdateXml(project, false);
             }
         }
 
-        private void UpdateXml(string project)
+        private void UpdateXml(string project, bool dlg = true)
         {
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(updateXml);
@@ -313,7 +362,10 @@ namespace BitTradeUpdater
                 xdoc.Save(updateXml);
             }
 
-            MessageBox.Show(string.Format("Release {0} has been published.", releaseVer));
+            if (dlg)
+            {
+                MessageBox.Show(string.Format("Release {0} has been published.", releaseVer));
+            }
         }
 
         private async void MakeRelease()

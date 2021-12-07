@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -335,12 +336,13 @@ namespace BitTradeUpdater
             }
         }
 
-        private void btnAllInOne_Click(object sender, EventArgs e)
+        private async void btnAllInOne_Click(object sender, EventArgs e)
         {
             string project = lbProject.Text;
             if (project != "")
             {
                 BuildAndSubmit(project);
+                await Task.Delay(10000);
                 MakeProject(project);
                 UpdateFirebaseRemote();
                 MakeRelease();

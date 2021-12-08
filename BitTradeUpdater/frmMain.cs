@@ -290,8 +290,8 @@ namespace BitTradeUpdater
             apkFile = apkFile.Replace('/', '\\');
             string dstFile1 = string.Format("{0}\\{1}.apk", project, project);
             string dstFile2 = string.Format("{0}\\{1}_{2}.apk", project, project, localVer);
-            string copyfile = string.Format("copy /y {0} {1} & copy /y {0} {1} ", 
-                apkFile, dstFile1, apkFile, dstFile2);
+            string copyfile = string.Format("copy /y {0} {1} & copy /y {0} {2} ", 
+                apkFile, dstFile1, dstFile2);
 
             string comment = "";
             if (tbDescript.Lines.Length == 0)
@@ -352,8 +352,7 @@ namespace BitTradeUpdater
             {
                 BuildAndSubmit(project);
                 await Task.Delay(10000);
-                return;
-                MakeProject(project);
+                MakeProject(project, false);
                 await UpdateFirebaseRemote();
                 await MakeRelease();
                 UpdateXml(project, false);

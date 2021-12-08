@@ -104,10 +104,15 @@ namespace BitTradeUpdater
 
             this.remoteVer = this.localVer;
             lbRemote.Text = this.remoteVer;
-            string dstFile = string.Format("{0}/{1}_{2}.apk", project, project, remoteVer);
-            if (copyfile) File.Copy(apkFile, dstFile, true);
-            devUrlpath = serverUri + dstFile.Replace('\\', '/');
-            devSha256 = CalcSha256(dstFile);
+            string dstFile1 = string.Format("{0}/{1}.apk", project, project);
+            string dstFile2 = string.Format("{0}/{1}_{2}.apk", project, project, remoteVer);
+            if (copyfile)
+            {
+                File.Copy(apkFile, dstFile1, true);
+                File.Copy(apkFile, dstFile2, true);
+            }
+            devUrlpath = serverUri + dstFile2.Replace('\\', '/');
+            devSha256 = CalcSha256(apkFile);
 
             // Update XML
             xnode["remoteVersion"].InnerText = remoteVer;
@@ -283,8 +288,10 @@ namespace BitTradeUpdater
 
             string apkFile = Path.Combine(projPath, "build\\app\\outputs\\apk\\release\\app-release.apk");
             apkFile = apkFile.Replace('/', '\\');
-            string dstFile = string.Format("{0}\\{1}_{2}.apk", project, project, localVer);
-            string copyfile = string.Format("copy /y {0} {1} ", apkFile, dstFile);
+            string dstFile1 = string.Format("{0}\\{1}.apk", project, project);
+            string dstFile2 = string.Format("{0}\\{1}_{2}.apk", project, project, localVer);
+            string copyfile = string.Format("copy /y {0} {1} & copy /y {0} {1} ", 
+                apkFile, dstFile1, apkFile, dstFile2);
 
             string comment = "";
             if (tbDescript.Lines.Length == 0)
@@ -345,7 +352,7 @@ namespace BitTradeUpdater
             {
                 BuildAndSubmit(project);
                 await Task.Delay(10000);
-                MakeProject(project);
+                MakeProject(project, false);
                 await UpdateFirebaseRemote();
                 await MakeRelease();
                 UpdateXml(project, false);

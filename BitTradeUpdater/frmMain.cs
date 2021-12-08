@@ -352,7 +352,8 @@ namespace BitTradeUpdater
             {
                 BuildAndSubmit(project);
                 await Task.Delay(10000);
-                MakeProject(project, false);
+                return;
+                MakeProject(project);
                 await UpdateFirebaseRemote();
                 await MakeRelease();
                 UpdateXml(project, false);

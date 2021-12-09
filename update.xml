@@ -2,11 +2,11 @@
 <NetbackUpdate>
   <update appID="BitTrade2">
     <applicationId>com.solarsuna.bittrade</applicationId>
-    <releaseVersion>2.0.0.54</releaseVersion>
-    <remoteVersion>2.0.0.54</remoteVersion>
-    <url>https://github.com/sums2022/BitTradeUpdate/raw/main/BitTrade2/BitTrade2_2.0.0.54.apk</url>
+    <releaseVersion>2.0.0.55</releaseVersion>
+    <remoteVersion>2.0.0.55</remoteVersion>
+    <url>https://github.com/sums2022/BitTradeUpdate/raw/main/BitTrade2/BitTrade2_2.0.0.55.apk</url>
     <projPath>..\bittrade2\</projPath>
     <description>Remote Descript</description>
-    <sha256>d5849a2a8ede34ce8df41dad60d0745575d28acab6123ceaf2b352bbf29b27b3</sha256>
+    <sha256>9926e54370d19935cf2cb7fc38026382e482055eb52dadf0bdcbf13d5e2d1f9a</sha256>
   </update>
 </NetbackUpdate>
